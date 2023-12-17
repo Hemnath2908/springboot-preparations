@@ -1,0 +1,29 @@
+package com.spring.preparation.orderservice.dto;
+
+import java.util.List;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "ORDER_TBL")
+public class OrderServiceDTO {
+	
+	private int orderId;
+	
+	private String transactionId;
+	
+	private List<OrderItems> orderItems;
+	
+	private  int price;
+	
+	private String status;
+	
+
+}

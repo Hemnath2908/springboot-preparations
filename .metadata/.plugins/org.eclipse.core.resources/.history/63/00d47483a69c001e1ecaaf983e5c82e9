@@ -1,0 +1,23 @@
+package com.spring.preparation.payment.dto;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "PAYMENT_TBL")
+public class PaymentDTO {
+	
+	private int paymentId;
+	
+	private String paymentGuid;
+	
+	private String paymentStatus;
+	
+
+}

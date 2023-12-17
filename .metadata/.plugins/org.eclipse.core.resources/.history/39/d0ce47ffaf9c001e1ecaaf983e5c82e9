@@ -1,0 +1,36 @@
+package com.spring.preparation.payment.dto;
+
+import java.util.UUID;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Entity
+@Data
+@Table(name = "PAYMENT_TBL")
+public class PaymentDTO {
+	
+	@Id
+	@GeneratedValue
+	@Column(name = "PAYMENT_ID")
+	private int paymentId;
+	
+	@Column(name = "AMOUNT")
+	private int price;
+	
+	@GeneratedValue(strategy =  GenerationType.UUID)
+	@Column(name = "PAYMENT_GUID")
+	private String paymentGuid;
+	
+	@Column(name = "PAYMENT_STATUS")
+	private String paymentStatus;
+	
+
+}

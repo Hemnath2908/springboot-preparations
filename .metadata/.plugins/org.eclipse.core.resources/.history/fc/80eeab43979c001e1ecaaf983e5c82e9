@@ -1,0 +1,5 @@
+package com.spring.preparation.orderservice.controller;
+
+public class OrderServiceController {
+
+}

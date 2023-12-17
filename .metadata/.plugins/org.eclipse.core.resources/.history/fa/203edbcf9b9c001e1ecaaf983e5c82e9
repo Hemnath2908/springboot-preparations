@@ -1,0 +1,18 @@
+package com.spring.preparation.orderservice.dto;
+
+import jakarta.persistence.Entity;
+import lombok.Data;
+
+@Entity
+@Data
+public class OrderItems {
+	
+	private String guid;
+	
+	private int orderId;
+	
+	private String item;
+	
+	private int qty;
+
+}

@@ -1,0 +1,19 @@
+package com.spring.preparation.payment.business;
+
+import org.springframework.stereotype.Service;
+
+import com.spring.preparation.payment.model.PaymentRequest;
+import com.spring.preparation.payment.model.PaymentResponse;
+
+@Service
+public class PaymentServiceBusiness {
+	
+	public PaymentResponse makePayment(PaymentRequest paymentRequest) {
+		return null;
+	}
+	
+	public PaymentResponse callUPIServices() {
+		return null;
+	}
+
+}

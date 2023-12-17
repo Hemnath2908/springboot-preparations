@@ -1,0 +1,8 @@
+package com.spring.preparation.orderservice.dto;
+
+@Entity
+public class OrderServiceDTO {
+	
+	
+
+}

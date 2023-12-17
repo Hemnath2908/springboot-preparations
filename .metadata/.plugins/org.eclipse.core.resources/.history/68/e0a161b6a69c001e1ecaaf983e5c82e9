@@ -1,0 +1,5 @@
+package com.spring.preparation.payment.vo;
+
+public interface PaymentRepository {
+
+}

@@ -1,0 +1,20 @@
+package com.spring.preparation.orderservice.dto;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import lombok.Data;
+
+@Entity
+@Data
+public class OrderItems {
+	
+	@Column(name = "GUID", unique = true)
+	private String guid;
+	
+	private int orderId;
+	
+	private String item;
+	
+	private int qty;
+
+}

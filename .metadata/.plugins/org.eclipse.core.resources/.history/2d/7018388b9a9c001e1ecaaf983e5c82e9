@@ -1,0 +1,10 @@
+package com.spring.preparation.orderservice.dto;
+
+import jakarta.persistence.Entity;
+
+@Entity
+public class OrderServiceDTO {
+	
+	
+
+}
