@@ -12,9 +12,11 @@ import com.spring.preparation.orderservice.model.TransactionRequest;
 import com.spring.preparation.orderservice.model.TransactionResponse;
 import com.spring.preparation.orderservice.vo.OrderServiceRepository;
 
-import jakarta.transaction.Transactional;
+import io.github.resilience4j.retry.annotation.Retry;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
+@Slf4j
 public class OrderServiceBusiness {
 
 	@Autowired
@@ -26,24 +28,33 @@ public class OrderServiceBusiness {
 	@Autowired
 	TransactionRequest transactionRequest;
 
-
+	@Retry(name = "orderService", fallbackMethod = "retryIfServerDown")
 	public TransactionResponse placeOrder(OrderServiceDTO orderDetails) {
 		String tranactionId = UUID.randomUUID().toString();
+		String orderStatus = "";
 		try {
 			transactionRequest.setPrice(orderDetails.getPrice());
-			
-			PaymentResponse paymentResponse = restTemplate.postForObject("http://PAYMENT-SERVICE/api/makePayment", transactionRequest, PaymentResponse.class);
+
+			log.info("Trying to connect Multiple times");
+
+			PaymentResponse paymentResponse = restTemplate.postForObject("http://PAYMENT-SERVICE/api/makePayment",
+					transactionRequest, PaymentResponse.class);
+			orderStatus = paymentResponse.getPaymentStatus().equals("Payment Success") ? "Order Placed Successfully"
+					: "Payment Failed Please try again later !!!";
 			if ("Payment Success".equals(paymentResponse.getPaymentStatus())) {
 				orderDetails.setTransactionId(paymentResponse.getTransactionId());
+				orderDetails.setStatus(paymentResponse.getPaymentStatus());
 				orderRepo.save(orderDetails);
 			}
-
 		} catch (Exception e) {
-			e.printStackTrace();
+			throw e; 
 		}
+		return new TransactionResponse(orderDetails.getOrderId(), orderDetails.getTransactionId(), orderStatus);
+	}
 
-		return new TransactionResponse(orderDetails.getOrderId(), orderDetails.getTransactionId(),
-				"Order Placed Successfully");
+	public TransactionResponse retryIfServerDown(Exception e) {
+		return new TransactionResponse(0, null, "Payment Failed due to server issue");
+
 	}
 
 }

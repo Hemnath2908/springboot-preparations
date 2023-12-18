@@ -1,9 +1,0 @@
-package com.spring.preparation.payment.model;
-
-import org.springframework.stereotype.Component;
-
-@Component
-@Data
-public class PaymentRequest {
-
-}

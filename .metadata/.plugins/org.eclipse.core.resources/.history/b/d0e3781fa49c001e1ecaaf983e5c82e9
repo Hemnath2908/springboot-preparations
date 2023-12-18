@@ -1,5 +1,0 @@
-package com.spring.preparation.payment.business;
-
-public class PaymentServiceController {
-
-}

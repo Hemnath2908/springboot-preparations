@@ -1,6 +1,7 @@
 package com.spring.preparation.payment.business;
 
 import java.util.Random;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,6 +23,7 @@ public class PaymentServiceBusiness {
 	public PaymentResponse makePayment(PaymentRequest paymentRequest) {
 		payment.setPrice(paymentRequest.getPrice());
 		payment.setPaymentStatus(callUPIServices());
+		payment.setPaymentGuid(generateUUID());
 		
 		paymentRepository.save(payment);
 		
@@ -33,6 +35,11 @@ public class PaymentServiceBusiness {
 		Random random = new Random();
 		String paymentStatus = random.nextBoolean()? "Payment Success" : "Payment Failed" ;
 		return paymentStatus;
+	}
+	
+	public String generateUUID() {
+		return UUID.randomUUID().toString();
+		
 	}
 
 }

@@ -7,6 +7,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.Data;
 
@@ -16,15 +17,17 @@ import lombok.Data;
 @Table(name = "PAYMENT_TBL")
 public class PaymentDTO {
 	
+
 	@Id
-	@Column(name = "PAYMENT_ID")
+	@GeneratedValue
+	@Column(name = "PAYMENT_ID" )
 	private int paymentId;
 	
 	@Column(name = "AMOUNT")
 	private int price;
 	
-	@GeneratedValue(strategy =  GenerationType.UUID.AUTO)
-	@Column(name = "PAYMENT_GUID", unique = true)
+	
+	@Column(name = "PAYMENT_GUID")
 	private String paymentGuid;
 	
 	@Column(name = "PAYMENT_STATUS")

@@ -1,5 +1,0 @@
-package com.spring.preparation.orderservice.vo;
-
-public class OrderServiceRepository {
-
-}
